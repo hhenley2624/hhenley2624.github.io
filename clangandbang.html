@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clangandbang</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Clang&Bang</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="./index.html">Home</a></li>
+        </ul>
+    </nav>
+    <form onsubmit="event.preventDefault();handleForm(this)">
+        <select name="sex" id="">
+            <option disabled selected>Select Sex</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <input type="number" name="age" placeholder="Enter your age">
+        <input type="number" name="height" placeholder="Enter height in inches">
+        <input type="number" name="weight" placeholder="Enter your weight">
+        <select name="activityLevel" id="">
+            <option disabled selected>Select activity level</option>
+            <option value="sedentary">Sedentary</option>
+            <option value="lightly active">Lightly active</option>
+            <option value="moderately active">Moderately active</option>
+            <option value="very active">Very active</option>
+            <option value="extra active">Extra active</option>
+        </select>
+        <input type="submit">
+    </form>
+    <div class="textareas-container">
+        <textarea disabled id="clangBangCode" cols="30" rows="10"></textarea>
+        <textarea disabled id="clangBangResult" cols="30" rows="5" style="text-align: left;"></textarea>
+    </div>
+    <script>
+        function handleForm(form){
+            const data = new FormData(form);
+            let myObject = {};
+            const activityLevels = {"sedentary": 1.2,
+                                    "lightly active": 1.375,
+                                    "moderately active": 1.55,
+                                    "very active": 1.725,
+                                    "extra active": 1.9};
+            let BMR = 0
+            for (const [name,value] of data) {
+                myObject[name] = value;
+            }
+            if (myObject['sex'] == 'male') {
+                BMR = 66+(13.7*(myObject['weight']/2.2))+(5*(myObject['height']*2.54))-(6.8*myObject['age'])
+            } else {
+                BMR = 665+(9.6*(myObject['weight']/2.2))+(1.8*(myObject['height']*2.54))-(4.7*myObject['age'])
+            }
+            let activityMultiplier = activityLevels[myObject['activityLevel']];
+            let TDEE = Math.ceil(activityMultiplier * BMR);
+            form.reset()
+            const myTextArea = document.getElementById("clangBangCode")
+            const myTextArea2 = document.getElementById("clangBangResult")
+            let code = ['clang height,weight,age,sex,intensity',
+            `    let sex=${myObject['sex']}`,
+            `    let age=${myObject['age']}`,
+            `    let height=${myObject['height']}`,
+            `    let weight=${myObject['weight']}`,
+            `    let activityLevel=${activityLevels[myObject['activityLevel']]}`,
+            `    if sex==male`,
+            `        let BMR=66+(weight/2.2)*13.7+(height*2.54)*5-(6.8*age)`,
+            `        let TDEE=BMR*activityLevel`,
+            `        sendit 'Your daily calories for maintenance is:'`,
+            `        bang TDEE`,
+            `    else`,
+            `        let BMR=665+(weight/2.2)*9.6+(height*2.54)*1.8-(4.7*age)`,
+            `        let TDEE=BMR*activityLevel`,
+            `        sendit 'Your daily calories for maintenance is:'`,
+            `        bang TDEE`,
+            `end`].join('\n');
+            myTextArea.value = code
+            myTextArea2.value = [`Your daily calories for maintenance is ${TDEE}`,
+            `Goal:`,
+            `    Shred:`,
+            `        Protein = ${myObject['weight']}`,
+            `        Carbs = ${Math.ceil((TDEE*.90)*.50)/4}`,
+            `        Fats = ${Math.ceil(((TDEE*.90)-(myObject['weight']*4)-((TDEE*.90)*.50))/9)}`,
+            `        Total calories = ${Math.ceil(TDEE*.90)}`,
+            `    Maintain:`,
+            `        Protein = ${myObject['weight']}`,
+            `        Carbs = ${Math.ceil((TDEE*.50)/4)}`,
+            `        Fats = ${Math.ceil((TDEE-(myObject['weight']*4)-(TDEE*.50))/9)}`,
+            `        Total calories = ${TDEE}`,
+            `    Lean Build:`,
+            `        Protein = ${myObject['weight']}`,
+            `        Carbs = ${Math.ceil(((TDEE*1.10)*.50)/4)}`,
+            `        Fats = ${Math.ceil(((TDEE*1.10)-(myObject['weight']*4)-((TDEE*1.10)*.50))/9)}`,
+            `        Total calories = ${Math.ceil(TDEE*1.10)}`,
+            ``,
+            `Thank you for using my calculator. I hope this helps you acheive your goals!`].join('\n');
+        }
+    </script>
+</body>
+</html>
