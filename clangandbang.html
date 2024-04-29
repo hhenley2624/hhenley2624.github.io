@@ -16,6 +16,7 @@
         </ul>
     </nav>
     <form onsubmit="event.preventDefault();handleForm(this)">
+        <h2>Calculate your Total Daily Energy Expenditure</h2>
         <select name="sex" id="">
             <option disabled selected>Select Sex</option>
             <option value="male">Male</option>
@@ -32,7 +33,7 @@
             <option value="very active">Very active</option>
             <option value="extra active">Extra active</option>
         </select>
-        <input type="submit">
+        <input type="submit" value="Calculate">
     </form>
     <div class="textareas-container">
         <textarea disabled id="clangBangCode" cols="30" rows="10"></textarea>
