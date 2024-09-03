@@ -295,3 +295,4 @@ iframe {
         flex-direction: column; /* Stack textareas vertically */
         height: auto; /* Auto height for better layout */
     }
+} /* Add closing curly brace */
