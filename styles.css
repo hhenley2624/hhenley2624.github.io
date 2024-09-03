@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
+/* Global Styles */
 body {
     margin: 0;
     padding: 0;
@@ -23,7 +24,6 @@ h1 {
 h2, h3 {
     text-align: center;
 }
-
 
 nav {
     text-align: center;
@@ -62,6 +62,8 @@ footer {
     background-color: #1a1f2b; /* Dark footer */
     color: #fff; /* White text color */
     padding: 10px 0;
+    border: 4px solid #4ec4f7; /* Light blue border resembling futuristic tech */
+    border-radius: 8px; /* Rounded corners */
 }
 
 .dropdown-content {
@@ -170,7 +172,6 @@ form input[type="submit"]:hover {
     display: flex;
     flex-direction: row; /* Arrange items side by side */
     align-items: stretch; /* Stretch items to equal height */
-    /* height: 50vh; Full height of the viewport */
     justify-content: space-evenly;
 }
 
@@ -215,17 +216,81 @@ iframe {
     border: none;
 }
 
-footer{
-    border: 4px solid #4ec4f7; /* Light blue border resembling futuristic tech */
-    border-radius: 8px; /* Rounded corners */
-}
-
-.container{
+.container {
     display: flex;
-
+    flex-wrap: wrap; /* Allow wrapping for better responsiveness */
+    justify-content: center; /* Center items */
 }
 
-.container > *{
+.container > * {
     margin-left: 25px;
     margin-right: 25px;
+    margin: 15px; /* Adjust margin for better spacing */
 }
+
+/* Media Queries for Responsive Design */
+
+/* Mobile Phones (Portrait and Landscape) */
+@media (max-width: 767px) {
+    h1 {
+        font-size: 1.8rem; /* Smaller font size */
+    }
+
+    header {
+        padding: 15px;
+    }
+
+    main {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .me, .birthday_dinner, .hawaii, .sdsu {
+        width: 80vw; /* Full width for images on small screens */
+        margin: 10px 0; /* Adjust margins for mobile */
+    }
+
+    nav ul li {
+        display: block; /* Stack navigation links */
+        margin: 5px 0; /* Vertical spacing */
+    }
+
+    .container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center-align items */
+    }
+
+    .textareas-container {
+        flex-direction: column; /* Stack textareas vertically */
+        height: auto; /* Auto height for better layout */
+    }
+
+    #clangBangCode, #clangBangResult {
+        width: 100%; /* Full width for textareas */
+    }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    h1 {
+        font-size: 2.2rem; /* Slightly smaller font size */
+    }
+
+    main {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .me, .birthday_dinner, .hawaii, .sdsu {
+        width: 40vw; /* Adjust image width for tablets */
+        margin: 10px;
+    }
+
+    .container {
+        flex-direction: row; /* Default row direction */
+        align-items: center;
+    }
+
+    .textareas-container {
+        flex-direction: column; /* Stack textareas vertically */
+        height: auto; /* Auto height for better layout */
