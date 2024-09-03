@@ -294,3 +294,4 @@ iframe {
     .textareas-container {
         flex-direction: column; /* Stack textareas vertically */
         height: auto; /* Auto height for better layout */
+    }
