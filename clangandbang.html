@@ -67,12 +67,12 @@
                 myObject[name] = value;
             }
             if (myObject['sex'] == 'male') {
-                BMR = 66+(13.7*(myObject['weight']/2.2))+(5*(myObject['height']*2.54))-(6.8*myObject['age'])
+                BMR = (10*(myObject['weight']/2.2))+(6.25*(myObject['height']*2.54))-(5*myObject['age'])+5
             } else {
-                BMR = 665+(9.6*(myObject['weight']/2.2))+(1.8*(myObject['height']*2.54))-(4.7*myObject['age'])
+                BMR = (10*(myObject['weight']/2.2))+(6.25*(myObject['height']*2.54))-(5*myObject['age'])-161
             }
             let activityMultiplier = activityLevels[myObject['activityLevel']];
-            let TDEE = Math.ceil(activityMultiplier * BMR);
+            let TDEE = Math.floor(activityMultiplier * BMR);
             form.reset()
             const myTextArea = document.getElementById("clangBangCode")
             const myTextArea2 = document.getElementById("clangBangResult")
@@ -98,19 +98,19 @@
             `Goal:`,
             `    Shred:`,
             `        Protein = ${myObject['weight']}`,
-            `        Carbs = ${Math.ceil((TDEE*.90)*.50)/4}`,
-            `        Fats = ${Math.ceil(((TDEE*.90)-(myObject['weight']*4)-((TDEE*.90)*.50))/9)}`,
-            `        Total calories = ${Math.ceil(TDEE*.90)}`,
+            `        Carbs = ${Math.floor((TDEE*.90)*.50)/4}`,
+            `        Fats = ${Math.floor(((TDEE*.90)-(myObject['weight']*4)-((TDEE*.90)*.50))/9)}`,
+            `        Total calories = ${Math.floor(TDEE*.90)}`,
             `    Maintain:`,
             `        Protein = ${myObject['weight']}`,
-            `        Carbs = ${Math.ceil((TDEE*.50)/4)}`,
-            `        Fats = ${Math.ceil((TDEE-(myObject['weight']*4)-(TDEE*.50))/9)}`,
+            `        Carbs = ${Math.floor((TDEE*.50)/4)}`,
+            `        Fats = ${Math.floor((TDEE-(myObject['weight']*4)-(TDEE*.50))/9)}`,
             `        Total calories = ${TDEE}`,
             `    Lean Build:`,
             `        Protein = ${myObject['weight']}`,
-            `        Carbs = ${Math.ceil(((TDEE*1.10)*.50)/4)}`,
-            `        Fats = ${Math.ceil(((TDEE*1.10)-(myObject['weight']*4)-((TDEE*1.10)*.50))/9)}`,
-            `        Total calories = ${Math.ceil(TDEE*1.10)}`,
+            `        Carbs = ${Math.floor(((TDEE*1.10)*.50)/4)}`,
+            `        Fats = ${Math.floor(((TDEE*1.10)-(myObject['weight']*4)-((TDEE*1.10)*.50))/9)}`,
+            `        Total calories = ${Math.floor(TDEE*1.10)}`,
             ``,
             `Thank you for using my calculator. I hope this helps you acheive your goals!`].join('\n');
         }
